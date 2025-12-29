@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Shay 💖</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  min-height:100vh;
+  overflow:hidden;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(120deg,#ffdde1,#ee9ca7,#a18cd1);
+  background-size:400% 400%;
+  animation:bgMove 14s ease infinite;
+  transition:.6s;
+}
+
+body.noche{
+  background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);
+}
+
+/* ================= FONDO ================= */
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* ================= EMOJIS ================= */
+.emoji{
+  position:absolute;
+  pointer-events:none;
+  animation:float linear infinite;
+  opacity:.9;
+}
+
+@keyframes float{
+  from{transform:translateY(110vh) scale(.6);opacity:0}
+  20%{opacity:1}
+  to{transform:translateY(-15vh) scale(1.2);opacity:0}
+}
+
+/* ================= INTRO ================= */
+.intro{
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  backdrop-filter:blur(18px);
+  z-index:10;
+}
+
+.name-wrap{
+  position:relative;
+}
+
+.name-wrap::before{
+  content:"";
+  position:absolute;
+  inset:-70px;
+  background:radial-gradient(circle,rgba(255,80,140,.6),transparent 70%);
+  filter:blur(40px);
+  animation:pulse 4s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+}
+
+.intro h1{
+  font-size:clamp(4em,12vw,5em);
+  color:#ff2f7d;
+  text-shadow:
+    0 0 20px rgba(255,50,120,.8),
+    0 0 60px rgba(255,50,120,.6);
+  animation:floatName 3s ease-in-out infinite;
+  transition:.2s;
+}
+
+@keyframes floatName{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+.intro p{
+  margin-top:10px;
+  opacity:.85;
+}
+
+.btn{
+  margin-top:28px;
+  padding:16px 48px;
+  border:none;
+  border-radius:50px;
+  font-size:1em;
+  color:white;
+  cursor:pointer;
+  background:linear-gradient(135deg,#ff4d8d,#ff2f63,#ff7aa2);
+  background-size:300% 300%;
+  animation:btnGlow 4s ease infinite;
+  box-shadow:0 15px 30px rgba(255,47,99,.6);
+  transition:.25s;
+}
+
+@keyframes btnGlow{
+  0%{background-position:0%}
+  100%{background-position:100%}
+}
+
+.btn:hover{transform:scale(1.1)}
+.btn:active{transform:scale(.92)}
+
+.toggle{
+  position:fixed;
+  top:15px;
+  right:15px;
+  z-index:20;
+}
+
+/* ================= CARTA ================= */
+.container{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card{
+  display:none;
+  width:92%;
+  max-width:520px;
+  padding:32px;
+  border-radius:32px;
+  background:rgba(255,255,255,.45);
+  backdrop-filter:blur(25px);
+  box-shadow:0 40px 80px rgba(0,0,0,.3);
+  animation:cardIn 1.4s ease;
+  text-align:center;
+}
+
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(40px) scale(.9)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+h2{color:#ff2f63;margin-bottom:12px}
+
+.msg{
+  margin:18px 0;
+  font-size:1.05em;
+  min-height:40px;
+}
+
+video{
+  width:100%;
+  border-radius:22px;
+  margin-top:18px;
+  animation:cinema 1.2s ease forwards;
+}
+
+@keyframes cinema{
+  from{opacity:0;transform:scale(.85)}
+  to{opacity:1;transform:scale(1)}
+}
+
+.signature{
+  margin-top:22px;
+  font-style:italic;
+  font-size:1.1em;
+  animation:sign 3s infinite;
+}
+
+@keyframes sign{
+  0%,100%{opacity:.7}
+  50%{opacity:1}
+}
+</style>
+</head>
+
+<body>
+
+<button class="btn toggle" onclick="modo()">🌙</button>
+
+<div class="intro" id="intro">
+  <div class="name-wrap">
+    <h1 id="name">Shay</h1>
+  </div>
+  <p>Tengo algo muy especial para ti 🤍</p>
+  <button class="btn" onclick="abrir()">Abrir 💌</button>
+</div>
+
+<div class="container">
+  <div class="card" id="card">
+    <h2>🎉 Feliz Cumpleaños 🎉</h2>
+
+    <div class="msg" id="m1"></div>
+    <div class="msg" id="m2"></div>
+    <div class="msg" id="m3"></div>
+    <div class="msg" id="m4"></div>
+
+    <button class="btn" id="btn" onclick="siguiente()">Siguiente 💖</button>
+
+    <div id="video" style="display:none">
+      <img src="recursos/enana y yo.jpg" alt="Video para Shay" style="width:100%;border-radius:22px;margin-top:18px;">
+    </div>
+
+    <div class="signature" id="firma"></div>
+    <div class="signature" id="comentario"></div>
+  </div>
+</div>
+
+<audio id="music" loop>
+  <source src="recursos/merry sinsmas.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* EMOJIS CONSTANTES */
+const emojis=["💖","✨","🌸","💫","💗"];
+setInterval(()=>{
+  const e=document.createElement("div");
+  e.className="emoji";
+  e.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.left=Math.random()*100+"vw";
+  e.style.fontSize=(16+Math.random()*22)+"px";
+  e.style.animationDuration=(6+Math.random()*6)+"s";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),12000);
+},300);
+
+/* TEXTO CON ESCRITURA */
+const textos=[
+  "Hoy celebramos a alguien increíble ✨",
+  "Aunque la distancia exista, el cariño sigue intacto 🤍",
+  "Deseo que este nuevo año te regale sonrisas y calma 🌸",
+  "Esto está hecho con mucho cariño, solo para ti 🎁"
+];
+
+let paso=0;
+
+function escribir(el,text){
+  let i=0;
+  el.innerHTML="";
+  const t=setInterval(()=>{
+    el.innerHTML+=text[i];
+    i++;
+    if(i>=text.length) clearInterval(t);
+  },35);
+}
+
+function abrir(){
+  intro.style.display="none";
+  card.style.display="block";
+  music.play();
+  siguiente();
+}
+
+function siguiente(){
+  if(paso<4){
+    escribir(document.getElementById("m"+(paso+1)),textos[paso]);
+    paso++;
+  }else{
+    video.style.display="block";
+    escribir(firma,"Espero que te guste este pequeño detalle. ¡Feliz cumpleaños!— Pablo 🤍");
+    escribir(comentario,"(si se lo pregunta si la enana es ud el personaje de millie me recordo a ud jaja)");
+    btn.style.display="none";
+  }
+}
+
+/* NOMBRE INTERACTIVO */
+const name=document.getElementById("name");
+document.addEventListener("mousemove",e=>{
+  const x=(window.innerWidth/2-e.clientX)/30;
+  const y=(window.innerHeight/2-e.clientY)/30;
+  name.style.transform=`translate(${x}px,${y}px)`;
+});
+
+/* MODO */
+function modo(){
+  document.body.classList.toggle("noche");
+}
+</script>
+
+</body>
+</html>
